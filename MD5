@@ -1,0 +1,14 @@
+3c965f974730e2ce4ec426986157c539 *DESCRIPTION
+313375e2df0fbb811b963da0ddee1f83 *NAMESPACE
+c68609d9e8d15b76c8fc2861d8e170ad *R/Huber.R
+ccbf435873a634c26d30a4109c91b74b *R/LAD.R
+55f4e279ae6b23ccf9c7ab60e03d4e44 *R/MTE.R
+77aa08225bed9abc67b7fb9d1c8bbf9a *man/LAD.Rd
+22252dcc10b135758cea481862cc0b1d *man/LADlasso.Rd
+e715c83f8419e19ec12d9947c3b26ace *man/MTE.Rd
+74f656f6a9b561d7001e391d39220b32 *man/MTElasso.Rd
+494258bc7213c79c14e60e0c57443ca6 *man/der.LtLik.Rd
+821d7dd6e271fc9ff31a3e7f6cde911e *man/huber.lasso.Rd
+f0288fe4ff97229eda2ffb7836eb3217 *man/huber.reg.Rd
+e393b6099fe0e58ad62d3eb4fee56e41 *man/huberloss.Rd
+adfcd2064b067ba83c053d2f52a56637 *man/lnt.Rd
