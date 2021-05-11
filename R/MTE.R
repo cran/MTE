@@ -5,9 +5,8 @@
 #' @param f values of density function.
 #' @param t tangent point. It is positive and close to 0. If 0, the tangent-likelihood is equivalent to log-likelihood.
 #' @param p Taylor expansion order, the value can be set up to 3.
-#'
-#' @export
-#'
+#' @return tangent likelihood
+#' @noRd
 #' @examples
 #' set.seed(2017)
 #' x=c(rnorm(80), rnorm(20, 10, 10))
@@ -34,7 +33,7 @@ lnt<- function(f, t, p){
 #' It returns to first and second derivatives of tangent-likelihood w.r.t. beta.
 #' This function is called in MTE main function.
 #'
-#' @keywords internal
+#' @noRd
 
 der.LtLik<- function(X, u, e, p, t0){
   n<- dim(X)[1]
@@ -81,7 +80,7 @@ der.LtLik<- function(X, u, e, p, t0){
 #' @param intercept logical input that indicates if intercept needs to be estimated. Default is FALSE.
 #'
 #'
-#' @return
+#' @return Returns estimates from MTE method.
 #' \item{beta}{the regression coefficient estimates}
 #' \item{fitted.value}{predicted response}
 #' \item{t}{the optimal tangent point through data-driven method}
@@ -219,7 +218,7 @@ MTE<- function(y, X, beta.ini, t, p, intercept=FALSE){
 #' @param p Taylor expansion order.
 #' @param lambda regularization parameter for LASSO, but not necessary if "adaptive=TRUE".
 #' @param adaptive logic argument to indicate if Adaptive-Lasso is used. Default is TRUE.
-#' @param method it can be ("MTE", "MLE"). The default is MTE.
+#' @param method it can be ("MTE", "MLE"). The default is MTE. If MLE, classical LASSO is used.
 #' @param t the tangent point. You may specify a sequence of values, so that the function automatically select the optimal one.
 #' @param intercept logical input that indicates if intercept needs to be estimated. Default is FALSE.
 #' @param ... other arguments that are used in function "adalasso()" that is called form parcor package.
@@ -242,8 +241,8 @@ MTE<- function(y, X, beta.ini, t, p, intercept=FALSE){
 #' output.MTELasso=MTElasso(y,X, p=2, beta.ini=beta0, t=seq(0, 0.1, 0.01), method="MTE")
 #' beta.est=output.MTELasso$beta
 #'
-#' @import parcor
-MTElasso<- function(y, X, beta.ini, p, lambda, adaptive=T, t, method="MTE", intercept=FALSE, ...){
+#' @import glmnet
+MTElasso<- function(y, X, beta.ini, p, lambda, adaptive=TRUE, t, method="MTE", intercept=FALSE, ...){
 
   if(intercept==TRUE) X=cbind(1, X)
 
@@ -257,7 +256,7 @@ MTElasso<- function(y, X, beta.ini, p, lambda, adaptive=T, t, method="MTE", inte
   if(method=="L2")  t=2
   if(method=="MLE"){
 
-    return(adalasso(X=X, y=y, ...))
+    return(glmnet(x=X, y=y, ...))
 
   }else{
 
@@ -324,11 +323,11 @@ MTElasso<- function(y, X, beta.ini, p, lambda, adaptive=T, t, method="MTE", inte
 
 
       ## penalty weight - lambda
-      if(adaptive==F & missing(lambda)){
+      if(adaptive==FALSE & missing(lambda)){
         stop("Error: If adaptive=FALSE, lambda must be provided!")
       }
 
-      if(adaptive==F){
+      if(adaptive==FALSE){
         bic.lambda=lambda
       }else{
         if(missing(lambda)){

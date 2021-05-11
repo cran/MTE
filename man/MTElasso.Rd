@@ -4,8 +4,18 @@
 \alias{MTElasso}
 \title{MTE-Lasso estimator}
 \usage{
-MTElasso(y, X, beta.ini, p, lambda, adaptive = T, t, method = "MTE",
-  intercept = FALSE, ...)
+MTElasso(
+  y,
+  X,
+  beta.ini,
+  p,
+  lambda,
+  adaptive = TRUE,
+  t,
+  method = "MTE",
+  intercept = FALSE,
+  ...
+)
 }
 \arguments{
 \item{y}{response vector.}
@@ -22,7 +32,7 @@ MTElasso(y, X, beta.ini, p, lambda, adaptive = T, t, method = "MTE",
 
 \item{t}{the tangent point. You may specify a sequence of values, so that the function automatically select the optimal one.}
 
-\item{method}{it can be ("MTE", "MLE"). The default is MTE.}
+\item{method}{it can be ("MTE", "MLE"). The default is MTE. If MLE, classical LASSO is used.}
 
 \item{intercept}{logical input that indicates if intercept needs to be estimated. Default is FALSE.}
 

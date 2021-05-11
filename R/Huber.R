@@ -126,7 +126,7 @@ huber.reg<- function(y, X, beta.ini, alpha, intercept=FALSE){
 #' output.HuberLasso=huber.lasso(y,X, beta.ini=LAD(y, X), lambda=0.2, adaptive=TRUE)
 #' beta.est=output.HuberLasso$beta
 #'
-huber.lasso<- function(y, X, beta.ini, lambda, alpha =2, adaptive=T, intercept=FALSE){
+huber.lasso<- function(y, X, beta.ini, lambda, alpha =2, adaptive=TRUE, intercept=FALSE){
 
   if(intercept==TRUE) X=cbind(1, X)
   n<- dim(X)[1]
@@ -154,11 +154,11 @@ huber.lasso<- function(y, X, beta.ini, lambda, alpha =2, adaptive=T, intercept=F
     e<- y-X0%*%beta0
 
     ## penalty weight - lambda
-    if(adaptive==F & missing(lambda)){
+    if(adaptive==FALSE & missing(lambda)){
       stop("Error: If adaptive=FALSE, lambda must be provided!")
     }
 
-    if(adaptive==F){
+    if(adaptive==FALSE){
       bic.lambda=lambda
     }else{
       if(missing(lambda)){

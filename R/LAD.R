@@ -80,7 +80,7 @@ LAD<- function(y, X, intercept=FALSE){
 #' @import quantreg
 LADlasso<- function(y, X, beta.ini, lambda, adaptive=TRUE, intercept=FALSE){
 
-  if(intercept==T) X=cbind(1, X)
+  if(intercept==TRUE) X=cbind(1, X)
 
   n<- nrow(X)
   beta1<- beta.ini
@@ -100,11 +100,11 @@ LADlasso<- function(y, X, beta.ini, lambda, adaptive=TRUE, intercept=FALSE){
     d<- length(beta1)
 
     ## penalty weight - lambda
-    if(adaptive==F & missing(lambda)){
+    if(adaptive==FALSE & missing(lambda)){
       stop("Error: If adaptive=FALSE, lambda must be provided!")
     }
 
-    if(adaptive==F){
+    if(adaptive==FALSE){
       bic.lambda=rep(lambda, d)
     }else{
       if(missing(lambda)){

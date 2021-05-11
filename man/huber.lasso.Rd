@@ -4,8 +4,15 @@
 \alias{huber.lasso}
 \title{Huber-Lasso estimator}
 \usage{
-huber.lasso(y, X, beta.ini, lambda, alpha = 2, adaptive = T,
-  intercept = FALSE)
+huber.lasso(
+  y,
+  X,
+  beta.ini,
+  lambda,
+  alpha = 2,
+  adaptive = TRUE,
+  intercept = FALSE
+)
 }
 \arguments{
 \item{y}{response vector.}
